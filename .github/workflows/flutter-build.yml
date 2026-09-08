@@ -162,8 +162,16 @@ jobs:
       - name: Set custom Rendezvous Server and Public Key
         shell: bash
         run: |
-          sed -i 's|pub const RENDEZVOUS_SERVERS: &\[&str\] = &\[.*\];|pub const RENDEZVOUS_SERVERS: \&[\&str] = \&["rustdesk.bertol-it.ch"];|g' libs/hbb_common/src/config.rs
-          sed -i 's|pub const RS_PUB_KEY: &str = ".*";|pub const RS_PUB_KEY: \&str = "biyppuKz6kZ9pbCj4GRZjjL7ptCF2wf9QUYGIEiTSZo=";|g' libs/hbb_common/src/config.rs
+          python3 -c '
+          path = "libs/hbb_common/src/config.rs"
+          with open(path, "r", encoding="utf-8") as f:
+              content = f.read()
+          import re
+          content = re.sub(r"pub const RENDEZVOUS_SERVERS: &\[&str\] = &\[.*?\];", "pub const RENDEZVOUS_SERVERS: &[&str] = &[\"rustdesk.bertol-it.ch\"];", content)
+          content = re.sub(r"pub const RS_PUB_KEY: &str = \".*?\";", "pub const RS_PUB_KEY: &str = \"biyppuKz6kZ9pbCj4GRZjjL7ptCF2wf9QUYGIEiTSZo=\";", content)
+          with open(path, "w", encoding="utf-8") as f:
+              f.write(content)
+          '
           cat libs/hbb_common/src/config.rs | grep -E "RENDEZVOUS_SERVERS|RS_PUB_KEY"
 
       - name: Restore bridge files
@@ -786,8 +794,16 @@ jobs:
       - name: Set custom Rendezvous Server and Public Key
         shell: bash
         run: |
-          sed -i 's|pub const RENDEZVOUS_SERVERS: &\[&str\] = &\[.*\];|pub const RENDEZVOUS_SERVERS: \&[\&str] = \&["rustdesk.bertol-it.ch"];|g' libs/hbb_common/src/config.rs
-          sed -i 's|pub const RS_PUB_KEY: &str = ".*";|pub const RS_PUB_KEY: \&str = "biyppuKz6kZ9pbCj4GRZjjL7ptCF2wf9QUYGIEiTSZo=";|g' libs/hbb_common/src/config.rs
+          python3 -c '
+          path = "libs/hbb_common/src/config.rs"
+          with open(path, "r", encoding="utf-8") as f:
+              content = f.read()
+          import re
+          content = re.sub(r"pub const RENDEZVOUS_SERVERS: &\[&str\] = &\[.*?\];", "pub const RENDEZVOUS_SERVERS: &[&str] = &[\"rustdesk.bertol-it.ch\"];", content)
+          content = re.sub(r"pub const RS_PUB_KEY: &str = \".*?\";", "pub const RS_PUB_KEY: &str = \"biyppuKz6kZ9pbCj4GRZjjL7ptCF2wf9QUYGIEiTSZo=\";", content)
+          with open(path, "w", encoding="utf-8") as f:
+              f.write(content)
+          '
           cat libs/hbb_common/src/config.rs | grep -E "RENDEZVOUS_SERVERS|RS_PUB_KEY"
 
       - name: Import the codesign cert
@@ -1565,8 +1581,16 @@ jobs:
       - name: Set custom Rendezvous Server and Public Key
         shell: bash
         run: |
-          sed -i 's|pub const RENDEZVOUS_SERVERS: &\[&str\] = &\[.*\];|pub const RENDEZVOUS_SERVERS: \&[\&str] = \&["rustdesk.bertol-it.ch"];|g' libs/hbb_common/src/config.rs
-          sed -i 's|pub const RS_PUB_KEY: &str = ".*";|pub const RS_PUB_KEY: \&str = "biyppuKz6kZ9pbCj4GRZjjL7ptCF2wf9QUYGIEiTSZo=";|g' libs/hbb_common/src/config.rs
+          python3 -c '
+          path = "libs/hbb_common/src/config.rs"
+          with open(path, "r", encoding="utf-8") as f:
+              content = f.read()
+          import re
+          content = re.sub(r"pub const RENDEZVOUS_SERVERS: &\[&str\] = &\[.*?\];", "pub const RENDEZVOUS_SERVERS: &[&str] = &[\"rustdesk.bertol-it.ch\"];", content)
+          content = re.sub(r"pub const RS_PUB_KEY: &str = \".*?\";", "pub const RS_PUB_KEY: &str = \"biyppuKz6kZ9pbCj4GRZjjL7ptCF2wf9QUYGIEiTSZo=\";", content)
+          with open(path, "w", encoding="utf-8") as f:
+              f.write(content)
+          '
           cat libs/hbb_common/src/config.rs | grep -E "RENDEZVOUS_SERVERS|RS_PUB_KEY"
 
       - name: Set Swap Space
